@@ -190,5 +190,5 @@ class OHN_segmentation:
         currentfold = ((t - 1) * 10)+ f
         percentComplete = (currentfold*100)/allfold
         time.sleep(0.1)
-        sys.stdout.write("\r" + ('=' * percentComplete) + ('' * (100 - percentComplete)) + (" [ %d" % percentComplete + "% ] "))
+        sys.stdout.write("\r Progress - [ %d" % percentComplete + "% ] ")
         sys.stdout.flush()
