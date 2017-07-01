@@ -1,10 +1,8 @@
-setwd("~/thesis_workspace/ONH_segmentation/Experiments")
-#initiate R package 
+#initiate R package
 library(EBImage)
 library(CRImage)
 library(reshape2)
 library(ggplot2)
-library(gplots)
 library(jpeg)
 library(lattice)
 library(parallel)

@@ -4,7 +4,7 @@ import rpy2.robjects as robjects
 R = robjects.r
 from matplotlib import pyplot as ppl
 from scipy.misc import imread
-import pandas as pd
+
 
 class Graph:
     def __init__(self,

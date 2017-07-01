@@ -1,4 +1,3 @@
-import pandas
 from enum import Enum
 
 # Constant utility class
