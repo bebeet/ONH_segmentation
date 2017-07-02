@@ -17,3 +17,4 @@ for cl in np.arange(2.0, 5.5 , 0.5):
             experiment_name="CLAHE_" + str(g) + "_" + str(cl)
         )
         experiment_bin.Run()
+
