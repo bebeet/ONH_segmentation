@@ -2,7 +2,7 @@ import ONH_segmentation as experiment
 import Constants as c
 import numpy as np
 
-for i in np.arange(0.1, 1.1, 0.1):
+for i in np.arange(0.6, 1.1, 0.1):
 
     experiment2 = experiment.OHN_segmentation(
         color=c.ColorModel.red,

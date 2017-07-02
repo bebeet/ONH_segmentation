@@ -8,8 +8,8 @@ experiment1 = experiment.OHN_segmentation(
     amplitude=100
 )
 experiment1.loadExperiment(
-    kfold_path="../Results/paper_experimentdata/Paper_version_foldsDatas3.csv",
-    experiment_param_path="../Results/paper_experimentdata/ExperimentsData.Rdata",
+    kfold_path="../ExperimentResults/paper_experimentdata/Paper_version_foldsDatas3.csv",
+    experiment_param_path="../ExperimentResults/paper_experimentdata/ExperimentsData.Rdata",
     result_folder_name="rerun_paper_version_amp100",
 
 )
