@@ -1,6 +1,6 @@
 import ONH_segmentation as experiment
 import Constants as c
-import numpy as np
+
 
 b=100
 

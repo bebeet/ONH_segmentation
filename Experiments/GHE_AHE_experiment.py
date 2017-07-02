@@ -2,7 +2,7 @@ import ONH_segmentation as experiment
 import Constants as c
 import numpy as np
 
-for g in np.arange(8, 9 , 1):
+for g in np.arange(1, 9 , 1):
 
     experiment_bin = experiment.OHN_segmentation(
         color=c.ColorModel.gray,
