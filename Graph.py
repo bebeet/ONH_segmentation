@@ -3,7 +3,6 @@ import maxflow
 import rpy2.robjects as robjects
 R = robjects.r
 from matplotlib import pyplot as ppl
-from scipy.misc import imread
 import Constants as c
 
 class Graph:
