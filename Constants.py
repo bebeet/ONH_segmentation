@@ -1,5 +1,10 @@
 from enum import Enum
 
+
+# Constant value
+result_folder_prefix = '../../ONH_segmentation_results/'
+image_width =52
+image_hight =52
 # Constant utility class
 class ColorModel(Enum):
     gray = "gray"
@@ -49,3 +54,9 @@ class WeightType(Enum):
          if (wt == "NONE"): return (self.NONE)
          if (wt == "GAUSSIAN"): return (self.GAUSS)
          if (wt == "LAPLACIAN"): return (self.LAP)
+
+class DataSet(Enum):
+    RIMONE_r1 ="RIMONE r1"
+
+    def get(self, wt):
+        if (wt == "RIMONE_r1"): return (self.RIMONE_r1)

@@ -11,6 +11,6 @@ experiment_bin = experiment.OHN_segmentation(
     )
 experiment_bin.initNewExperiment(
         times=10,
-        result_folder_name="experiment_gray_bin_"+str(b)
+        experiment_name="experiment_gray_bin_" + str(b)
     )
 experiment_bin.Run()

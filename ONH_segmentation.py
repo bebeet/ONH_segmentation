@@ -2,11 +2,8 @@ import rpy2.robjects as robjects
 import os
 import numpy as np
 import time,sys
-import pandas
 from Graph import Graph
 import Constants as c
-from scipy.misc import imread
-from matplotlib import pyplot as ppl
 from datetime import date
 
 # Assigned fixed values
@@ -46,18 +43,18 @@ class OHN_segmentation:
 
 
     def initNewExperiment(self,
-        times=1,
-        numfolds=10,
-        images_path='../Dataset/RIM_ONE_r1/All_Resize/10/equalized_l_clahe',
-        masks_path='../Dataset/RIM_ONE_r1/All_Resize/10/groundtruth_all_experts',
-        result_folder_name ="experiment",
-        runningTrainData=False):
+                          times=1,
+                          numfolds=10,
+                          images_path='../Dataset/RIM_ONE_r1/All_Resize/10/equalized_l_clahe',
+                          masks_path='../Dataset/RIM_ONE_r1/All_Resize/10/groundtruth_all_experts',
+                          experiment_name ="experiment",
+                          runningTrainData=False):
 
         # Set paths
         self.images_path = images_path
         self.masks_path = masks_path
-        self.result_folder_name = date.today().strftime("%m%d%y") + "_"+result_folder_name
-        self.result_path = '../Results/'+self.result_folder_name
+        self.result_folder_name = date.today().strftime("%m%d%y") + "_" + experiment_name
+        self.result_path =  c.result_folder_prefix+self.result_folder_name
 
         #Running Info
         self.times = times
@@ -73,7 +70,7 @@ class OHN_segmentation:
         # Load old experiment inoder to re-run by providing ExperimentsData.Rdata including KfoldData,internal and external parameter
         R.loadExperimentData(kfold_path,experiment_param_path)
         self.result_folder_name = date.today().strftime("%m%d%y") + "_"+result_folder_name
-        self.result_path = '../Results/'+self.result_folder_name
+        self.result_path = c.result_folder_prefix+self.result_folder_name
 
         #Running Info
         self.times = R['times'][0]
@@ -95,6 +92,8 @@ class OHN_segmentation:
 
         R.saveParameter(
             result_path=self.result_path,
+            image_path = self.images_path,
+            mask_path = self.masks_path,
             times=self.times,
             numfolds = self.numfolds,
             runningTrainData = self.runningTrainData,
@@ -141,6 +140,7 @@ class OHN_segmentation:
 
 
                 result_folder = self.result_path + '/T' + str(t) + '/test/F'+str(f)
+                #change to result folder
                 trainedHistogram = R.Histogram(dataTrain.path, dataTrainMask.path,self.result_path,t,f, self.color,self.histogram_binning)
                 if(c.WeightType.NONE.value.__ne__(self.weighType)):
                     self.weightingFunction = R.WeightingFunction(dataTrainMask.path,self.result_path,t,f,self.weighType,self.amplitude)
@@ -161,8 +161,9 @@ class OHN_segmentation:
         print("\n")
 
         R.Evaluation(
-            segmented_images_folder=self.result_folder_name,
-            masks_path='../Dataset/RIM_ONE_r1/All_Resize/10/groundtruth_all_experts',
+            result_path=self.result_path,
+            masks_path=self.masks_path,
+            experiment_name =self.result_folder_name,
             dataset="RIMONE r1",
             times=self.times,
             numfolds=self.numfolds,
@@ -175,6 +176,7 @@ class OHN_segmentation:
             weighType=self.weighType
 
         )
+
 
 
     def LoadSegmentModel(self,trainedHistogram,trainedWeightingFunction):
@@ -192,3 +194,8 @@ class OHN_segmentation:
         time.sleep(0.1)
         sys.stdout.write("\r Progress - [ %d" % percentComplete + "% ] ")
         sys.stdout.flush()
+
+
+    def EvaluateResult(self, folder_name):
+        R.source('../R/Evaluation/runEvaluation.R')
+        R.runEvalution(c.result_folder_prefix, self.masks_path, folder_name)

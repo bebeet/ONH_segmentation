@@ -1,16 +1,14 @@
-OratioPlot  <- function(segmented_images_folder,Evaluate_result)
+OratioPlot  <- function(savePath,segmented_images_folder,Evaluate_result)
 {
+  sum_byImg <- summarySE(Evaluate_result, measurevar="Evaluation_rate", groupvars=c("Evaluation_method","name"))
+  sum_byImg$sum <- paste(round(sum_byImg$Evaluation_rate,3),"$","//","pm","$",round(sum_byImg$ci,3),sep="")
+  write.csv(sum_byImg,file = paste(savePath,segmented_images_folder,"_Summary_byImg.csv",sep=""))
   
-  savePath <- paste('../Results/',segmented_images_folder,'/evaluation/',sep="")
-  sum_byName <- summarySE(Evaluate_result, measurevar="Evaluation_rate", groupvars=c("Evaluation_method","name"))
-  sum_byName$sum <- paste(round(sum_byName$Evaluation_rate,3),"$","//","pm","$",round(sum_byName$ci,3),sep="")
-  write.csv(sum_byName,file = paste(savePath,segmented_images_folder,"_Summary_byName.csv",sep=""))
-  
-  df <- sum_byName[ which(sum_byName$Evaluation_method=='Oratio'), ]
+  df <- sum_byImg[ which(sum_byImg$Evaluation_method=='Oratio'), ]
   df$name <- as.numeric(gsub("Im","",df$name))
   df$Method <-segmented_images_folder
   
-  jpeg(file=paste(savePath,segmented_images_folder,"_Summary_byName.jpg",sep=""),
+  jpeg(file=paste(savePath,segmented_images_folder,"_Oratio_byImg.jpg",sep=""),
       units="in", width=5, height=4,res=300)
     p<-ggplot(df, aes(name,Evaluation_rate))+ geom_point(size=2, colour = "blue")+
       theme(strip.text.y = element_text(size = 15))+

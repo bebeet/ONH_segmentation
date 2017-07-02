@@ -14,6 +14,6 @@ for cl in np.arange(2.0, 5.5 , 0.5):
         experiment_bin.initNewExperiment(
             times=10,
             images_path='../Dataset/RIM_ONE_r1/All_Resize/10/CLAHE/gray/'+str(g)+'/'+str(cl),
-            result_folder_name="CLAHE_"+str(g)+"_"+str(cl)
+            experiment_name="CLAHE_" + str(g) + "_" + str(cl)
         )
         experiment_bin.Run()

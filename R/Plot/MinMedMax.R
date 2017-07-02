@@ -1,25 +1,56 @@
-MinMedMax  <- function(segmented_images_folder,Evaluate_result)
+MinMedMax  <- function(savePath,segmented_images_folder,segmented_images,Evaluate_result)
 {
+  savePath <- paste(savePath,'/outlier/',sep="")
+  if(!file.exists(savePath)){
+    dir.create(savePath)
+  }
   
-  savePath <- paste('../Results/',segmented_images_folder,'/evaluation/',sep="")
-  sum_byName <- summarySE(Evaluate_result, measurevar="Evaluation_rate", groupvars=c("Evaluation_method","name"))
+  sum_byName <- summarySE(Evaluate_result, measurevar="Evaluation_rate", groupvars=c("Evaluation_method","name","class"))
   sum_byName$sum <- paste(round(sum_byName$Evaluation_rate,3),"$","//","pm","$",round(sum_byName$ci,3),sep="")
+  result <-data.frame(name=c(), class=c(),Evaluation_method = c(), MinMaxValue = c())
   
   eval_method<-unique(sum_byName$Evaluation_method)
-  result <-data.frame(name=c(), Evaluation_method = c(), MinMaxValue = c())
-  for(i in 1:length(eval_method))
+  img_class<-unique(sum_byName$class)
+
+  for(c in 1:length(img_class))
   {
-    min <- sum_byName$name[ which(sum_byName$Evaluation_method==eval_method[i]
-                                 & sum_byName$Evaluation_rate == min(sum_byName$Evaluation_rate) ), ]
-    med <- sum_byName$name[ which(sum_byName$Evaluation_method==eval_method[i]
-                                 & sum_byName$Evaluation_rate == median(sum_byName$Evaluation_rate) ), ]
-    max <- sum_byName$name[ which(sum_byName$Evaluation_method==eval_method[i]
-                                 & sum_byName$Evaluation_rate == max(sum_byName$Evaluation_rate) ), ]
-    result<-rbind(result,data.frame(name=min,Evaluation_method = eval_method[i], MinMaxValue = "min"))
-    result<-rbind(result,data.frame(name=med,Evaluation_method = eval_method[i], MinMaxValue = "med"))
-    result<-rbind(result,data.frame(name=max,Evaluation_method = eval_method[i], MinMaxValue = "max"))
+    sum_byName_Class <- subset(sum_byName, class == img_class[c])
+    for(i in 1:length(eval_method))
+    {
+      sum_byName_Class_Method <- subset(sum_byName_Class, Evaluation_method == eval_method[i])
+
+      min <-subset(sum_byName_Class_Method, Evaluation_rate == min(Evaluation_rate),select=c(name))
+      im_path<-subset(segmented_images,as.character(name)== min$name[1],select=c(segment_path))
+      images <- EBImage::readImage(im_path$segment_path[1])
+      EBImage::writeImage(images,paste(savePath,"/",img_class[c],"_",eval_method[i],"_min_",min$name[1],".jpg",sep=""), quality = 100)
+      
+      q2 <-sum_byName_Class_Method$name[which.min(abs(sum_byName_Class_Method$Evaluation_rate - quantile(sum_byName_Class_Method$Evaluation_rate,0.25)))]
+      im_path<-subset(segmented_images,as.character(name)== q2[1],select=c(segment_path))
+      images <- EBImage::readImage(im_path$segment_path[1])
+      EBImage::writeImage(images,paste(savePath,"/",img_class[c],"_",eval_method[i],"_q2_",q2[1],".jpg",sep=""), quality = 100)
+      
+      med <-sum_byName_Class_Method$name[which.min(abs(sum_byName_Class_Method$Evaluation_rate - median(sum_byName_Class_Method$Evaluation_rate)))]
+      im_path<-subset(segmented_images,as.character(name)== med[1],select=c(segment_path))
+      images <- EBImage::readImage(im_path$segment_path[1])
+      EBImage::writeImage(images,paste(savePath,"/",img_class[c],"_",eval_method[i],"_med_",med[1],".jpg",sep=""), quality = 100)
+      
+      q4 <-sum_byName_Class_Method$name[which.min(abs(sum_byName_Class_Method$Evaluation_rate - quantile(sum_byName_Class_Method$Evaluation_rate,0.75)))]
+      im_path<-subset(segmented_images,as.character(name)== q4[1],select=c(segment_path))
+      images <- EBImage::readImage(im_path$segment_path[1])
+      EBImage::writeImage(images,paste(savePath,"/",img_class[c],"_",eval_method[i],"_q4_",q4[1],".jpg",sep=""), quality = 100)
+      
+      max <-subset(sum_byName_Class_Method, Evaluation_rate == max(Evaluation_rate),select=c(name))
+      im_path<-subset(segmented_images,as.character(name)== max$name[1],select=c(segment_path))
+      images <- EBImage::readImage(im_path$segment_path[1])
+      EBImage::writeImage(images,paste(savePath,"/",img_class[c],"_",eval_method[i],"_max_",max$name[1],".jpg",sep=""), quality = 100)
+      
+      result<-rbind(result,data.frame(name=min$name[1],class=img_class[c],Evaluation_method = eval_method[i], MinMaxValue = "min"))
+      result<-rbind(result,data.frame(name=q2[1],class=img_class[c],Evaluation_method = eval_method[i], MinMaxValue = "q2"))
+      result<-rbind(result,data.frame(name=med[1],class=img_class[c],Evaluation_method = eval_method[i], MinMaxValue = "med"))
+      result<-rbind(result,data.frame(name=q4[1],class=img_class[c],Evaluation_method = eval_method[i], MinMaxValue = "q4"))
+      result<-rbind(result,data.frame(name=max$name[1],class=img_class[c],Evaluation_method = eval_method[i], MinMaxValue = "max"))
+    }
   }
-  write.csv(result,file = paste(savePath,'../Results/',segmented_images_folder,"_MinMedMax.csv",sep=""))
-  
+  write.csv(result,file = paste(savePath,segmented_images_folder,"_Outlier.csv",sep=""))
 
 }

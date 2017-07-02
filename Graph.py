@@ -4,7 +4,7 @@ import rpy2.robjects as robjects
 R = robjects.r
 from matplotlib import pyplot as ppl
 from scipy.misc import imread
-
+import Constants as c
 
 class Graph:
     def __init__(self,
@@ -12,9 +12,8 @@ class Graph:
 
         # Read test image from file path
         self.image_path=image_path
-        self.image = imread(image_path)
-        self.width = self.image.shape[1]
-        self.hight = self.image.shape[0]
+        self.width = c.image_width
+        self.hight = c.image_hight
 
         # Create the graph.
         self.g = maxflow.Graph[int](0, 0)

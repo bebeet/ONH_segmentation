@@ -11,7 +11,7 @@ for l in np.arange(0.1, 1.1, 0.1):
             sigmas=s
         )
         experiment1.initNewExperiment(
-            result_folder_name="Save_lamda_"+str(l)+"sigma"+str(s),
+            experiment_name="Save_lamda_" + str(l) + "sigma" + str(s),
             times=1
         )
         experiment1.Run()

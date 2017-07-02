@@ -1,7 +1,5 @@
-PlotByClass <- function(segmented_images_folder,Evaluate_result)
+PlotByClass <- function(savePath,segmented_images_folder,Evaluate_result)
 {
-  savePath <- paste('../Results/',segmented_images_folder,'/evaluation/',sep="")
-  
   sum_byClass <- summarySE(Evaluate_result, measurevar="Evaluation_rate", groupvars=c("Evaluation_method","class"))
   sum_byClass$sum <- paste(round(sum_byClass$Evaluation_rate,3),"$","//","pm","$",round(sum_byClass$ci,3),sep="")
   write.csv(sum_byClass,file = paste(savePath,segmented_images_folder,"_Summary_byClass.csv",sep=""))

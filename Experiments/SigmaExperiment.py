@@ -13,7 +13,7 @@ for l in np.arange(0.3, 1.1, 0.1):
         experiment1.initNewExperiment(
 
             masks_path='../Dataset/RIM_ONE_r1/All_Resize/10/groundtruth_all_experts',
-            result_folder_name="lamda_"+str(l)+"sigma"+str(s),
+            experiment_name="lamda_" + str(l) + "sigma" + str(s),
             times=10
         )
         # images_path='../Dataset/RIM_ONE_r1/All_Resize/10/GHE/gray',

@@ -10,7 +10,7 @@ experiment1 = experiment.OHN_segmentation(
 experiment1.initNewExperiment(
     images_path='../Dataset/RIM_ONE_r1/All_Resize/10/equalized_l_clahe',
     masks_path='../Dataset/RIM_ONE_r1/All_Resize/10/groundtruth_all_experts',
-    result_folder_name="la*b_clahe_HSV_gc",
+    experiment_name="la*b_clahe_HSV_gc",
 )
 experiment1.Run()
 
@@ -22,7 +22,7 @@ experiment2 = experiment.OHN_segmentation(
 experiment2.initNewExperiment(
     images_path='../Dataset/RIM_ONE_r1/All_Resize/10/equalized_l_clahe',
     masks_path='../Dataset/RIM_ONE_r1/All_Resize/10/groundtruth_all_experts',
-    result_folder_name="la*b_clahe_Opponent_gc",
+    experiment_name="la*b_clahe_Opponent_gc",
 )
 experiment2.Run()
 
@@ -35,7 +35,7 @@ experiment3 = experiment.OHN_segmentation(
 experiment3.initNewExperiment(
     images_path='../Dataset/RIM_ONE_r1/All_Resize/10/equalized_l_clahe',
     masks_path='../Dataset/RIM_ONE_r1/All_Resize/10/groundtruth_all_experts',
-    result_folder_name="la*b_clahe_RGB_gc",
+    experiment_name="la*b_clahe_RGB_gc",
 )
 experiment3.Run()
 
@@ -48,6 +48,6 @@ experiment4 = experiment.OHN_segmentation(
 experiment4.initNewExperiment(
     images_path='../Dataset/RIM_ONE_r1/All_Resize/10/equalized_l_clahe',
     masks_path='../Dataset/RIM_ONE_r1/All_Resize/10/groundtruth_all_experts',
-    result_folder_name="la*b_clahe_LAB_gc",
+    experiment_name="la*b_clahe_LAB_gc",
 )
 experiment4.Run()

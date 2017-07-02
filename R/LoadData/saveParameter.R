@@ -1,6 +1,8 @@
 
-saveParameter <- function(result_path,times,numfolds,runningTrainData,lambdas,sigmas,histogram_binning,color,weighType,amplitude)
+saveParameter <- function(result_path,image_path,mask_path,times,numfolds,runningTrainData,lambdas,sigmas,histogram_binning,color,weighType,amplitude)
 {
+  image_path =image_path
+  mask_path=mask_path
   times=times
   numfolds =numfolds
   runningTrainData = runningTrainData
@@ -10,6 +12,6 @@ saveParameter <- function(result_path,times,numfolds,runningTrainData,lambdas,si
   color=color
   weighType=weighType
   amplitude=amplitude
-  save(times,numfolds,runningTrainData,lambdas,sigmas,histogram_binning,color,weighType,amplitude,
+  save(image_path,mask_path,times,numfolds,runningTrainData,lambdas,sigmas,histogram_binning,color,weighType,amplitude,
          file=paste(result_path,"/ExperimentsData.Rdata",sep=""))
 }

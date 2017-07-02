@@ -39,7 +39,7 @@ Histogram <- function(dataTrain,dataTrainMask,save_name,t,f,
   
   saveHistogram=function(hist,save_name,t,f)
   {
-    file_path = paste('../Results/',save_name,'/T',t,'/F',f,'_',weight.ColorModel,'_histogram.Rdata',sep="")
+    file_path = paste(save_name,'/T',t,'/F',f,'_',weight.ColorModel,'_histogram.Rdata',sep="")
     save(hist,file=file_path) 
   }
   

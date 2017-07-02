@@ -12,6 +12,6 @@ for b in np.arange(2, 20 , 2):
     )
     experiment_bin.initNewExperiment(
         times=1,
-        result_folder_name="Saved_red_bin_" + str(b)
+        experiment_name="Saved_red_bin_" + str(b)
     )
     experiment_bin.Run()
