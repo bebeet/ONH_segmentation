@@ -160,6 +160,7 @@ class OHN_segmentation:
                 self.ReportProgress(t,f)
         print("\n")
 
+
         R.Evaluation(
             result_path=self.result_path,
             masks_path=self.masks_path,
