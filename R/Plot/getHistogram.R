@@ -1,5 +1,5 @@
 result_path<-"../../Experiment results/"
-folder <-"Binning Experiment"
+folder <-"Lamda Experiment"
 subfolder<-"gray"
 
 
@@ -14,8 +14,8 @@ if(!file.exists(savePath)){
 for(t in 1:length(fname))
 {
 
-  currentfiles<-paste(result_path,folder,'/',fname[t],"/T1/F1_gray_histogram.Rdata",sep="")
-  newlocation <-paste(savePath,"/",fname[t],"_gray_histogram.Rdata",sep="")
+  currentfiles<-paste(result_path,folder,'/',fname[t],"/T1/F1_",subfolder,"_histogram.Rdata",sep="")
+  newlocation <-paste(savePath,"/",fname[t],"_histogram.Rdata",sep="")
   file.copy(from=currentfiles, to=newlocation, 
             recursive = FALSE, 
             copy.mode = TRUE)
