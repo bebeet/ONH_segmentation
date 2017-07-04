@@ -1,8 +1,8 @@
-result_path<-"../../Experiment results/"
-folder <-"Binning Experiment"
-subfolder<-"bin"
+result_path<-"../Dataset/RIM_ONE_r1/All_Resize/10/AHE/"
+folder <-"gray"
+subfolder<-"*"
 runningTrainData <- FALSE
-getImageName<-c("Im001","Im013","Im103","Im035")
+getImageName<-c("Im001","Im013","Im103","Im035","Im135","Im053","Im077","Im138","Im141")
 
 folder_name <- list.dirs(path=paste(result_path,folder,sep=""),full.names = FALSE, recursive = FALSE)
 fname <- subset(folder_name,grepl(subfolder,folder_name))
