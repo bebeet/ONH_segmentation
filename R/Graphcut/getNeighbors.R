@@ -33,6 +33,17 @@ getNeighbors <- function(width,height,order=FALSE)
   #print("North neighbors Direction")
   #print(N_neighbors)
   
+  #North North West  Direction
+  NNW_mat <- rbind(matrix(0,2,width),mat)
+  NNW_mat <- cbind(matrix(0,height+2),NNW_mat)
+  NNW_mat <- NNW_mat[-c((height+1):(height+2)),-(width+1)]
+  #print(NNW_mat)
+  
+  NNW_neighbors <- data.frame(node_p=melt(mat)$value,node_q=melt(NNW_mat)$value)
+  NNW_neighbors <- NNW_neighbors[ which(NNW_neighbors$node_q!=0),]
+  #print("North neighbors Direction")
+  #print(NNW_neighbors)
+  
   #West Direction
   W_mat <- cbind(matrix(0,height),mat)
   W_mat <- W_mat[,-(width+1)]
@@ -54,6 +65,17 @@ getNeighbors <- function(width,height,order=FALSE)
   #print("Northwest neighbors Direction")
   #print(NW_neighbors)
   
+  #West Northwest Direction
+  WNW_mat <- rbind(matrix(0,1,width),mat)
+  WNW_mat <- cbind(matrix(0,height+1,2),WNW_mat)
+  WNW_mat <- WNW_mat[-(height+1),-(c((width+1):(width+2)))]
+  #print(WNW_mat)
+  
+  WNW_neighbors <- data.frame(node_p=melt(mat)$value,node_q=melt(WNW_mat)$value)
+  WNW_neighbors <- WNW_neighbors[ which(WNW_neighbors$node_q!=0),]
+  #print("West Northwest neighbors Direction")
+  #print(WNW_neighbors)
+  
   #Southwest Direction
   SW_mat <- rbind(mat,matrix(0,1,width))
   SW_mat <- cbind(matrix(0,height+1),SW_mat)
@@ -65,12 +87,38 @@ getNeighbors <- function(width,height,order=FALSE)
   #print("Southwest neighbors Direction")
   #print(SW_neighbors)
   
+  #West Southwest Direction
+  WSW_mat <- rbind(mat,matrix(0,1,width))
+  WSW_mat <- cbind(matrix(0,height+1,2),WSW_mat)
+  WSW_mat <- WSW_mat[-1,-(c((width+1):(width+2)))]
+  #print(WSW_mat)
+  
+  WSW_neighbors <- data.frame(node_p=melt(mat)$value,node_q=melt(WSW_mat)$value)
+  WSW_neighbors <- WSW_neighbors[ which(WSW_neighbors$node_q!=0),]
+  #print("West Southwest neighbors Direction")
+  #print(WSW_neighbors)
+  
+  #South Southwest Direction
+  SSW_mat <- rbind(mat,matrix(0,2,width))
+  SSW_mat <- cbind(matrix(0,height+2),SSW_mat)
+  SSW_mat <- SSW_mat[-c((height-2):(height-1)),-(width+1)]
+  #print(SSW_mat)
+  
+  SSW_neighbors <- data.frame(node_p=melt(mat)$value,node_q=melt(SSW_mat)$value)
+  SSW_neighbors <- SSW_neighbors[ which(SSW_neighbors$node_q!=0),]
+  #print("South Southwest neighbors Direction")
+  #print(SSW_neighbors)
+  
   #Combine all direction to neighbors dataframe
   neighbors <- data.frame(node_p=c(),node_q=c())
   neighbors <- rbind(neighbors,N_neighbors)
+  #neighbors <- rbind(neighbors,NNW_neighbors)
+  #neighbors <- rbind(neighbors,WNW_neighbors)
   neighbors <- rbind(neighbors,W_neighbors)
   neighbors <- rbind(neighbors,NW_neighbors)
   neighbors <- rbind(neighbors,SW_neighbors)
+  #neighbors <- rbind(neighbors,WSW_neighbors)
+  #neighbors <- rbind(neighbors,SSW_neighbors)
   
   neighbors$px <- lookup$Var1[match(neighbors$node_p,lookup$value)]
   neighbors$py <- lookup$Var2[match(neighbors$node_p,lookup$value)]

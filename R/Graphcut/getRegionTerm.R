@@ -93,9 +93,9 @@ getRegionTerm <- function(path,lamda,histogram,weightingFunction=NULL,save_path)
     
   }
   
-  imname <- tail(unlist(strsplit(path, "/")), n=1)
-  imname <-gsub(".jpg","",imname)
-  write.csv(tLink,file = paste(save_path,"/",imname,"_tLink.csv",sep=""))
+  #imname <- tail(unlist(strsplit(path, "/")), n=1)
+  #imname <-gsub(".jpg","",imname)
+  #write.csv(tLink,file = paste(save_path,"/",imname,"_tLink.csv",sep=""))
 
   return(tLink[,c("nodeid","Intensity","s_weight","t_weight")])
   

@@ -43,7 +43,8 @@ class Graph:
 
         # Add the boundary edges.
         for index in range(0, self.width * self.hight):
-            self.g.add_edge(node_p[index] - 1, node_q[index] - 1, weight[index], weight[index])
+            #self.g.add_edge(node_p[index] - 1, node_q[index] - 1, weight[index], weight[index])
+            self.g.add_edge(node_p[index] - 1, node_q[index] - 1,0, 0)
             # print("---------- check n ---------")
             # print("node_p="+str(node_p[index]-1))
             # print("node_q="+str(node_q[index]-1))

@@ -1,8 +1,8 @@
 
 result_path<-"../../Experiment results/"
-folder <-"Lamda Experiment"
-savename <- "lamda_all_evaluation.csv"
-subfolder <- "lam"
+folder <-"Color space GC"
+savename <- "color_gc_all_evaluation.csv"
+subfolder <- "07"
 
 fname <- list.dirs(path=paste(result_path,folder,sep=""),full.names = FALSE, recursive = FALSE)
 fname <- subset(fname,grepl(subfolder,fname))

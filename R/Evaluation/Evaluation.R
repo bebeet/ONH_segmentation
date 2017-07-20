@@ -154,9 +154,16 @@ Evaluation <- function(
                        "$","//","pm","$",format(round(sum_all$ci,3), nsmall = 3),sep="")
   sum_all<-sum_all[c("N","Evaluation_method","sum")]
   sum_all <- reshape(sum_all, idvar = "N", timevar = "Evaluation_method", direction = "wide")
+
+  
+  sum_byImg <- summarySE(Evaluate_result, measurevar="Evaluation_rate", groupvars=c("Evaluation_method","name"))
+  sum_byImg$sum <- paste(round(sum_byImg$Evaluation_rate,3),"$","//","pm","$",round(sum_byImg$ci,3),sep="")
+
+  sum_byImg_Oratio <- sum_byImg[ which(sum_byImg$Evaluation_method=='Oratio'), ]
+  sum_byImg_Oratio_Success <- sum_byImg_Oratio[ which(sum_byImg_Oratio$Evaluation_rate>=0.5), ]
+  sum_all$SuccessRate <- format(round(length(sum_byImg_Oratio_Success$name)/169*100,2),nsmall = 2)
   write.csv(sum_all,file = paste(savePath,experiment_name,"_Summary_All.csv",sep=""))
   
-
   source('../R/Plot/OratioPlot.R')
   OratioPlot(savePath,experiment_name,Evaluate_result)
   

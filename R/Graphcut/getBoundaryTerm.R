@@ -15,9 +15,9 @@ getBoundaryTerm <- function(path,sigmaValue=1,colorMode = c("gray",
   
   img <-getImageData(img,weight.colorModel,type="array") 
   nLink <- computeBoundaryTerm(img,sigmaValue)
-  imname <- tail(unlist(strsplit(path, "/")), n=1)
-  imname <-gsub(".jpg","",imname)
-  write.csv(nLink,file = paste(save_path,"/",imname,"_nLink.csv",sep=""))
+  #imname <- tail(unlist(strsplit(path, "/")), n=1)
+  #imname <-gsub(".jpg","",imname)
+  #write.csv(nLink,file = paste(save_path,"/",imname,"_nLink.csv",sep=""))
   return(nLink)
   
 }

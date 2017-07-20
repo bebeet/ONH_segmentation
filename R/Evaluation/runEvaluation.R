@@ -26,5 +26,7 @@ runEvalution <- function(result_prefix,masks_path,folder_name)
 }
 
 
-
+#runEvalution("/home/punsiriboo/thesis_workspace/Experiment results/Binning Experiment",
+#  "../Dataset/RIM_ONE_r1/All_Resize/10/groundtruth_all_experts"
+#  ,"experiment")
 

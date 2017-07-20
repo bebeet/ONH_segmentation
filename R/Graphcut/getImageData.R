@@ -78,7 +78,7 @@ getImageData <- function(img,
     G_images <- EBImage::channel(img, "green")
     B_images <- EBImage::channel(img, "blue")
     O1 <- normalizeData((R_images - G_images)/sqrt(2))
-    O2 <- normalizeData((R_images + G_images + B_images)/sqrt(3))
+    O2 <- normalizeData(((R_images + G_images -(2* B_images))/sqrt(6)))
     O3 <- normalizeData((R_images + G_images + B_images)/sqrt(3))
     selectedImg <- array(c(O1,O2,O3), dim=c(width,height,3))
   }

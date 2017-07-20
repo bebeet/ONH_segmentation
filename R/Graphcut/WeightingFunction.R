@@ -127,7 +127,7 @@ WeightingFunction <- function(maskList,save_name,t,f,wtype=c("GAUSSIAN","LAPLACI
 
   saveWeightingFunction=function(wf,save_name,t,f)
   {
-    file_path = paste('../Results/',save_name,'/T',t,'/F',f,'_',type,'_weightingFunction.Rdata',sep="")
+    file_path = paste(save_name,'/T',t,'/F',f,'_',type,'_weightingFunction.Rdata',sep="")
     save(wf,file=file_path) 
   }
   

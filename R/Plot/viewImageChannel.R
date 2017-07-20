@@ -75,8 +75,7 @@ viewImageChannel <- function(path,channel= c("gray","red","green","blue","H","S"
 
 }
 
-color<-c("gray","red","green","blue","H","S","V","L",
-         "A","B","O1","O2","O3")
+color<-c("S","V")
 for(c in 1:length(color))
 {
   images_path = paste('../Dataset/RIM_ONE_r1/All_Resize/10/original',sep = "")

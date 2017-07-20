@@ -43,7 +43,7 @@ class OHN_segmentation:
 
 
     def initNewExperiment(self,
-                          times=1,
+                          times=10,
                           numfolds=10,
                           images_path='../Dataset/RIM_ONE_r1/All_Resize/10/equalized_l_clahe',
                           masks_path='../Dataset/RIM_ONE_r1/All_Resize/10/groundtruth_all_experts',
@@ -138,6 +138,7 @@ class OHN_segmentation:
                 dataTrainMask.name = dataTrainMask.rx2(1)
                 dataTrainMask.path = dataTrainMask.rx2(2)
 
+                starttime = time.time()
 
                 result_folder = self.result_path + '/T' + str(t) + '/test/F'+str(f)
                 #change to result folder
@@ -145,12 +146,14 @@ class OHN_segmentation:
                 if(c.WeightType.NONE.value.__ne__(self.weighType)):
                     self.weightingFunction = R.WeightingFunction(dataTrainMask.path,self.result_path,t,f,self.weighType,self.amplitude)
                 else: self.weightingFunction = robjects.NULL
+                print("Training Time = %s" % (time.time() - starttime))
 
                 for i in np.arange(0,len(dataTest.path)):
+                    starttime = time.time()
                     graphcut = Graph(dataTest.path[i])
                     graphcut.graphConstruction(self.sigmas,self.lambdas,trainedHistogram,self.color,self.weightingFunction,save_path=result_folder)
                     graphcut.maxflow_mincut(save_path=result_folder,imname=dataTest.name[i])
-
+                    print("Segment Time = %s" % (time.time() - starttime))
                 if(self.runningTrainData):
                     for i in np.arange(0, len(dataTrain.path)):
                         graphcut = Graph(dataTrain.path[i])
