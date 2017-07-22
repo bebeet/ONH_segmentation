@@ -1,5 +1,5 @@
 result_path<-"/home/punsiriboo/thesis_workspace/Experiment results/"
-folder <-"Color space GC"
+folder <-"ColorSpace_Gauss"
 subfolder<-"*"
 runningTrainData <- FALSE
 getImageName<-c("Im001","Im013","Im103","Im035","Im135","Im053","Im077","Im138","Im141",
@@ -15,7 +15,7 @@ if(!file.exists(savePath)){
 
 for(t in 1:length(fname))
 {
-  foldData<- read.csv(paste(result_path,folder,"/",fname[t],"//foldsDatas.csv",sep=""))
+  foldData<- read.csv(paste(result_path,folder,"/",fname[t],"/foldsDatas.csv",sep=""))
   if(runningTrainData){type <- c("train","test")}
   else{  type <- c("test")}
   

@@ -1,7 +1,7 @@
 
 result_path<-"../../Experiment results/"
-folder <-"Color space GC"
-savename <- "color_gc_all_evaluation.csv"
+folder <-"ColorSpace_Gauss"
+savename <- "colorspace_gauss_lab_evaluation.csv"
 subfolder <- "07"
 
 fname <- list.dirs(path=paste(result_path,folder,sep=""),full.names = FALSE, recursive = FALSE)

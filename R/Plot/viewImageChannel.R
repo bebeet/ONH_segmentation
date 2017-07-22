@@ -75,13 +75,14 @@ viewImageChannel <- function(path,channel= c("gray","red","green","blue","H","S"
 
 }
 
-color<-c("S","V")
+color<-c("gray","red","green","blue","H","S","V","L",
+         "A","B","O1","O2","O3","LAB","HSV","Opponent","RGB")
 for(c in 1:length(color))
 {
-  images_path = paste('../Dataset/RIM_ONE_r1/All_Resize/10/original',sep = "")
+  images_path = paste('../Dataset/RIM_ONE_r1/All_Resize/10/equalized_sv_clahe',sep = "")
   all_img <- list.files(path=images_path, pattern="*.jpg") 
   
-  savePath <- paste("../Dataset/RIM_ONE_r1/All_Resize/10/","original_",color[c],sep="")
+  savePath <- paste("../Dataset/RIM_ONE_r1/All_Resize/10/","equalized_sv_clahe_",color[c],sep="")
   if(!file.exists(savePath)){
     dir.create(savePath)
   }
