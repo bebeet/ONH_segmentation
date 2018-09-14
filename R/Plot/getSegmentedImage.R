@@ -1,6 +1,7 @@
 result_path<-"/home/punsiriboo/thesis_workspace/Experiment results/"
-folder <-"ColorSpace_Gauss"
+folder <-"Gauuss_Thesis"
 subfolder<-"*"
+
 runningTrainData <- FALSE
 getImageName<-c("Im001","Im013","Im103","Im035","Im135","Im053","Im077","Im138","Im141",
                 "Im019","Im045")

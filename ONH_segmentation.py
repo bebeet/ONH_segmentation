@@ -45,7 +45,7 @@ class OHN_segmentation:
     def initNewExperiment(self,
                           times=10,
                           numfolds=10,
-                          images_path='../Dataset/RIM_ONE_r1/All_Resize/10/equalized_sv_clahe',
+                          images_path='../Dataset/RIM_ONE_r1/All_Resize/10/equalized_l_clahe',
                           masks_path='../Dataset/RIM_ONE_r1/All_Resize/10/groundtruth_all_experts',
                           experiment_name ="experiment",
                           runningTrainData=False):
